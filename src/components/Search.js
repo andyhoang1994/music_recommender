@@ -3,8 +3,8 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
 
-class Search extends Component {
-    constructor(props) {
+class Search extends Component{
+    constructor(props){
         super(props);
         this.getSearchResults = this.getSearchResults.bind(this);
 
@@ -12,10 +12,10 @@ class Search extends Component {
             query: '',
         }
     }
-    updateSongList(songs) {
+    updateSongList(songs){
         this.props.updateSongList(songs);
     }
-    getSearchResults(event) {
+    getSearchResults(event){
         event.preventDefault();
         let self = this;
 
@@ -27,7 +27,7 @@ class Search extends Component {
                 }, function(error){
                     console.error(error);
                 }
-        )
+            )
     }
 
     handleChange = (e) => {
@@ -36,16 +36,14 @@ class Search extends Component {
         })
     }
 
-    render() {
+    render = () => {
         return(
             <form onSubmit={this.getSearchResults}>
-                <Input variant="contained" color="primary" onChange={this.handleChange} style={{'margin-top': '20px'}}>
-                    Get Search
-                    <SearchIcon className="rightIcon" />
+                <Input variant="contained" color="primary" placeholder="Enter an artist or title" onChange={this.handleChange} style={{'margin-top': '20px'}}>
                 </Input>
                 <br/>
                 <Button type="submit" variant="outlined" color="primary" style={{margin: '20px'}}>
-                    Get Songs
+                    Search
                     <SearchIcon className="rightIcon" />
                 </Button>
             </form>

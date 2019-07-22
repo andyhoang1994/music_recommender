@@ -7,11 +7,11 @@ import Search from './Search.js';
 import SongList from './SongList.js';
 import SelectedSongs from './SelectedSongs.js'
 
-class Body extends Component {
-    constructor(props) {
+class Body extends Component{
+    constructor(props){
         super(props);
         this.spotify = new Spotify();
-        if (this.props.haveToken) {
+        if(this.props.haveToken){
             this.spotify.setAccessToken(this.props.token);
         }
         localStorage.setItem('access_token', this.props.token);
@@ -29,11 +29,6 @@ class Body extends Component {
         };
     }
 
-    updateChosenGenres = (genreList) => {
-        this.setState({
-            chosenGenres: genreList,
-            songListNeedsUpdate: true});
-    }
     updateSongList = (songList) => {
         this.setState({songList: songList});
         console.log('songList:',songList);
@@ -51,7 +46,6 @@ class Body extends Component {
             }
         }
     }
-    
     removeSelectedSong = (song) => {
         var newArr = [...this.state.selectedSongs];
         var index = newArr.indexOf(song);
@@ -89,7 +83,6 @@ class Body extends Component {
             if (error) console.log(error);
             else{
                 if(seedID.length > 0){
-
                     data.audio_features.map((song) => {
                         if(song != null){
                             avgAcousticness += song.acousticness;
@@ -115,70 +108,68 @@ class Body extends Component {
         })
     }
     
-    
-
-    render() { 
+    render(){ 
         this.seedCount = this.state.chosenGenres.length;
-        if (!this.props.haveToken || !this.props.tokenValid) {
-            return (  
+        if(!this.props.haveToken || !this.props.tokenValid){
+            return(  
                 <div className="bodyContainer">
                     <GetToken />
                 </div>
             );
-        } else {
-            return (
+        } else{
+            return(
                 <div className="bodyContainer">
                     <div className="searchBox">
                         <Search
-                        spotify={this.spotify}
-                        getSearchResults={this.getSearchResults}
-                        updateSongList={this.updateSongList}
+                            spotify={this.spotify}
+                            getSearchResults={this.getSearchResults}
+                            updateSongList={this.updateSongList}
                         />
                         <SongList
-                        spotify={this.spotify}
-                        songList={this.state.songList}
-                        addSelectedSong={this.addSelectedSong}
-                        selectedSongs={this.state.selectedSongs}
-                        acousticness={this.state.acousticness} 
-                        danceability={this.state.danceability}
-                        energy={this.state.energy} 
-                        instrumentalness={this.state.instrumentalness}
-                        valence={this.state.valence}
-                        updateSliders={this.updateSliders}
-                        />
-                    </div>
-                    <div className="recommendBox">
-                        <div className="selectedBox">
-                            <SelectedSongs
                             spotify={this.spotify}
+                            songList={this.state.songList}
+                            addSelectedSong={this.addSelectedSong}
                             selectedSongs={this.state.selectedSongs}
-                            removeSelectedSong={this.removeSelectedSong}
                             acousticness={this.state.acousticness} 
                             danceability={this.state.danceability}
                             energy={this.state.energy} 
                             instrumentalness={this.state.instrumentalness}
                             valence={this.state.valence}
+                            updateSliders={this.updateSliders}
+                        />
+                    </div>
+                    <div className="recommendBox">
+                        <div className="selectedBox">
+                            <SelectedSongs
+                                spotify={this.spotify}
+                                selectedSongs={this.state.selectedSongs}
+                                removeSelectedSong={this.removeSelectedSong}
+                                acousticness={this.state.acousticness} 
+                                danceability={this.state.danceability}
+                                energy={this.state.energy} 
+                                instrumentalness={this.state.instrumentalness}
+                                valence={this.state.valence}
                             />
                         </div>
                         <Sliders
-                        acousticness={this.state.acousticness} 
-                        danceability={this.state.danceability}
-                        energy={this.state.energy} 
-                        instrumentalness={this.state.instrumentalness}
-                        valence={this.state.valence} 
-                        updateSliders={this.updateSliders}
+                            acousticness={this.state.acousticness} 
+                            danceability={this.state.danceability}
+                            energy={this.state.energy} 
+                            instrumentalness={this.state.instrumentalness}
+                            valence={this.state.valence} 
+                            updateSliders={this.updateSliders}
                         />
                         <GetSongs
-                        spotify={this.spotify}
-                        selectedSongs={this.state.selectedSongs}
-                        removeSelectedSong={this.removeSelectedSong}
-                        acousticness={this.state.acousticness} 
-                        danceability={this.state.danceability}
-                        energy={this.state.energy}
-                        instrumentalness={this.state.instrumentalness}
-                        valence={this.state.valence}
-                        updateRecommended={this.updateRecommended}
-                        recommendedList={this.state.recommendedList}
+                            spotify={this.spotify}
+                            selectedSongs={this.state.selectedSongs}
+                            removeSelectedSong={this.removeSelectedSong}
+                            acousticness={this.state.acousticness} 
+                            danceability={this.state.danceability}
+                            energy={this.state.energy}
+                            instrumentalness={this.state.instrumentalness}
+                            valence={this.state.valence}
+                            updateRecommended={this.updateRecommended}
+                            recommendedList={this.state.recommendedList}
                         />
                     </div>
                 </div>

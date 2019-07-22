@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import PlaySong from './PlaySong.js';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
 import List from '@material-ui/core/List';
@@ -11,11 +11,10 @@ import PlayArrow from '@material-ui/icons/PlayArrow';
 import Fab from '@material-ui/core/Fab';
 import CreatePlaylist from './CreatePlaylist.js';
 
-class GetSongs extends Component {
-    constructor(props) {
+class GetSongs extends Component{
+    constructor(props){
         super(props);
         this.getRecommendations = this.getRecommendations.bind(this);
-        this.handleClick = this.handleClick.bind(this);
     }
 
     updateRecommended = (songs) => {
@@ -40,69 +39,14 @@ class GetSongs extends Component {
             target_valence: this.props.valence,
         }
         this.props.spotify.getRecommendations(seeds, function(error, data) {
-            if (error) console.log(error);
+            if(error) console.log(error);
             else{
                 self.updateRecommended(data.tracks);
-                console.log(data.tracks)
+                console.log(data.tracks);
             }
         })
         this.createItems();
     }
-
-    handleClick = (uri, href) => {
-        axios({
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-          },
-          url: 'https://api.spotify.com/v1/me/player/devices'
-        })
-          // Attempt to find recent active / available device from returned array of registered devices
-          .then(resp => {
-            let index = 0;
-            while(resp.data.devices[index]) {
-              if (resp.data.devices[index].is_active && !resp.data.devices[index].is_restricted) {
-                return resp.data.devices[index].id;
-              }
-              index++;
-            }
-            if (typeof resp.data.devices[0] !== 'undefined') {
-              return resp.data.devices[0].id;
-            }
-            throw Error('Cannot find an available device to play on.');
-          })
-    
-          // Play song on first available device, else open browser player
-          .then((device) => {
-            axios({
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-              },
-              url: 'https://api.spotify.com/v1/me/player/play',
-              method: 'PUT',
-              params: {
-                device_id: device,
-              },
-              data: {
-                uris: [uri],
-              }
-            })
-              .catch(err => {
-                console.log(err);
-                if (!err.response.status) return;
-                let errorStatus = err.response.status;
-                if (errorStatus === 400) {
-                }
-            })
-        })
-        .catch(err => {
-        console.log(err);
-        window.open(href, '_blank');
-        });
-    };
 
     createItems = () => {
         const listItems = this.props.recommendedList.map((song, i) => {
@@ -116,11 +60,11 @@ class GetSongs extends Component {
                             secondary={song.artists[0].name}
                         />
                         <Fab color="primary" aria-label="Play_Arrow" size="small">
-                            <PlayArrow onClick={() => {this.handleClick(song.uri, song.external_urls.spotify)}}/>
+                            <PlayArrow onClick={() => {PlaySong(song.uri, song.external_urls.spotify)}}/>
                         </Fab>
                     </ListItem>;
         });
-        return (
+        return(
             <React.Fragment>
                 <CreatePlaylist
                 spotify={this.props.spotify}

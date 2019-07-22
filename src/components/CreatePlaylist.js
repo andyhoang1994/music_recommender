@@ -4,8 +4,8 @@ import SaveIcon from '@material-ui/icons/Save';
 import OpenInNew from '@material-ui/icons/OpenInNew';
 import TextField from '@material-ui/core/TextField';
 
-class CreatePlaylist extends Component {
-    constructor(props) {
+class CreatePlaylist extends Component{
+    constructor(props){
         super(props);
         this.getPlaylist = this.getPlaylist.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -18,24 +18,26 @@ class CreatePlaylist extends Component {
         };
     }
 
-    componentDidMount(){
+    componentDidMount = () => {
         this.getUserId();
     }
     
-    handleChange(event) {
-        this.setState({playlistNameInputValue: event.target.value});
+    handleChange = (e) => {
+        this.setState(
+            {playlistNameInputValue: e.target.value}
+        );
     }
 
-    buildSongUriArray(songs) {
+    buildSongUriArray = (songs) => {
         let uriArray = [];
         songs.map(song => uriArray.push(song.uri));
         return (uriArray);
     }
 
-    getUserId() {
+    getUserId = () => {
         let self = this;
         this.props.spotify.getMe().then(
-            function(response) {
+            function(response){
                 self.setState({
                     spotifyUser: response,
                 })
@@ -45,16 +47,16 @@ class CreatePlaylist extends Component {
         )
     }
 
-    fillPlaylist(playlistID) {
+    fillPlaylist = (playlistID) => {
         this.props.spotify.addTracksToPlaylist(playlistID,this.buildSongUriArray(this.props.recommendedList)).then(
-            function() {
-            }, function(error) {
+            function(){
+            }, function(error){
                 console.error(error);
             }
         )
     }
 
-    getPlaylist() {
+    getPlaylist = () => {
         let self = this;
         let playlistName = (this.state.playlistNameInputValue !== '' ? this.state.playlistNameInputValue : "New Playlist");
         this.props.spotify.createPlaylist(
@@ -66,15 +68,15 @@ class CreatePlaylist extends Component {
         ).then(
             function(response){
                 self.fillPlaylist(response.id);
-                self.setState({playlistUrl: response.external_urls.spotify})
-            }, function(error) {
+                self.setState({playlistUrl: response.external_urls.spotify});
+            }, function(error){
                 console.error(error);
             }
         );
     }
 
-    render() {
-        if (this.state.spotifyUser != null) {
+    render(){
+        if(this.state.spotifyUser != null){
             return(
                 <div className="create_playlist" style={{margin: '20px 0'}}>
                     <TextField label="Playlist Name"value={this.state.playlistNameInputValue} onChange={this.handleChange}></TextField>
@@ -98,10 +100,9 @@ class CreatePlaylist extends Component {
                     </div>
                 </div>
             );
-        } else {
-            return(
-                <div></div>
-            )
+        }
+        else{
+            return <React.Fragment/>
         }
     }
 }

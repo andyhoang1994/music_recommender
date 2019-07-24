@@ -23,6 +23,7 @@
         flex-direction: row;
     }
     .searchBox, .recommendBox{
+        min-width: 504px;
         min-height: 2045px;
     }
     .overflow{

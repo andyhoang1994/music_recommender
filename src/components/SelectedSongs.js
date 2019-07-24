@@ -31,6 +31,7 @@ class SelectedSongs extends Component {
                         <Avatar src={song.album.images[2].url}/>
                     </ListItemAvatar>
                     <ListItemText
+                        classes={{primary:'overflow', secondary:'overflow'}}
                         primary={song.name}
                         secondary={song.album.name}
                     />

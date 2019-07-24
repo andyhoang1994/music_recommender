@@ -11,7 +11,7 @@
     font-size: calc(10px + 1vmin);
     color: white;
 }
-.bodyContaine {
+.bodyContainer {
         min-width: 504px;
         display: flex;
         justify-content: center;

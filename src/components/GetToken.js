@@ -5,9 +5,9 @@ class GetToken extends Component{
 
     tokenRequestUrl(){
         const apiUrl = 'https://accounts.spotify.com/authorize';
-        const clientId = CLIEND_ID; //Enter you Spotify app client ID
+        const clientId = CLIENT_ID; //Enter you Spotify app client ID
         const redirectUri = REDIRECT_URI; //Enter your redirect uri that you've inputted into your Spotify app;
-        const responseType = 'token';   
+        const responseType = 'token';
         const requestUrl = 
             apiUrl +
             '?client_id=' + clientId +

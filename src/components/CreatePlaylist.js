@@ -79,21 +79,16 @@ class CreatePlaylist extends Component{
         if(this.state.spotifyUser != null){
             return(
                 <div className="create_playlist" style={{margin: '20px 0'}}>
-                    <TextField label="Playlist Name"value={this.state.playlistNameInputValue} onChange={this.handleChange}></TextField>
+                    <TextField label="Playlist Name"value={this.state.playlistNameInputValue} onChange={this.handleChange}/>
                     <Button variant="contained" color="primary" onClick={this.getPlaylist}>
                         Create Playlist
-                        <SaveIcon className="rightIcon" />    
+                        <SaveIcon className="rightIcon"/>    
                     </Button>
                     <div>
                         {this.state.playlistUrl !== ""
-                            ? <Button 
-                                className="open_playlist" 
-                                variant="contained" 
-                                href={this.state.playlistUrl} 
-                                target="_blank"
-                            >
+                            ? <Button className="open_playlist" variant="contained" href={this.state.playlistUrl} target="_blank">
                                 Open Playlist
-                                <OpenInNew className="rightIcon"/>    
+                                <OpenInNew className="rightIcon"/>
                             </Button>
                             : <React.Fragment/>
                         }

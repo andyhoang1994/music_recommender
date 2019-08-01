@@ -23,7 +23,7 @@ class App extends Component{
 				<header className="App-header">
 					<h1>Music Recommender</h1>
 						<h4>A web app for finding songs of your preference</h4>
-                        <h4>code available at <a href='https://github.com/andyhoang1994/music_recommender'>https://github.com/andyhoang1994/music_recommender</a></h4>
+                        <h4>Code available at <a href='https://github.com/andyhoang1994/music_recommender'>https://github.com/andyhoang1994/music_recommender</a></h4>
 				</header>
 				<Body 
 					token={this.props.accessToken} 

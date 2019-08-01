@@ -36,7 +36,7 @@ class SelectedSongs extends Component {
                         secondary={song.album.name}
                     />
                     <IconButton aria-label="Delete">
-                        <DeleteIcon onClick={() => {this.removeSelectedSong(song)}}/>
+                        <DeleteIcon onClick={this.removeSelectedSong.bind(this, song)}/>
                     </IconButton>
                 </ListItem>
         });

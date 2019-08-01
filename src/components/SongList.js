@@ -32,10 +32,10 @@ class SongList extends Component{
                             secondary={song.artists[0].name}
                         />
                         <Fab color="primary" aria-label="Play_Arrow" size="small" style={{margin:'0 10px'}}>
-                            <PlayArrow onClick={() => {PlaySong(song.uri, song.external_urls.spotify)}}/>
+                            <PlayArrow onClick={PlaySong.bind(this, song.uri, song.external_urls.spotify)}/>
                         </Fab>
                         <Fab color="primary" aria-label="Add" size="small">
-                            <AddIcon  onClick={() => {this.addSelectedSong(song)}}/>
+                            <AddIcon  onClick={this.addSelectedSong.bind(this, song)}/>
                         </Fab>
                     </ListItem>;
         });

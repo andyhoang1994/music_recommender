@@ -1,6 +1,6 @@
 {
   "name": "music_recommender",
-  "version": "1.0.3",
+  "version": "1.1.1",
   "private": false,
   "homepage": "https://andyhoang1994.github.io/music_recommender",
   "dependencies": {

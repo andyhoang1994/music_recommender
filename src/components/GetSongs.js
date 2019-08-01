@@ -60,7 +60,7 @@ class GetSongs extends Component{
                             secondary={song.artists[0].name}
                         />
                         <Fab color="primary" aria-label="Play_Arrow" size="small">
-                            <PlayArrow onClick={() => {PlaySong(song.uri, song.external_urls.spotify)}}/>
+                            <PlayArrow onClick={PlaySong.bind(this, song.uri, song.external_urls.spotify)}/>
                         </Fab>
                     </ListItem>;
         });
